@@ -1,0 +1,22 @@
+{
+  "name": "who-logged-in-aws",
+  "version": "1.0.0",
+  "description": "---",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/srflaxu40/who-logged-in-aws.git"
+  },
+  "author": "Johnson",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/srflaxu40/who-logged-in-aws/issues"
+  },
+  "homepage": "https://github.com/srflaxu40/who-logged-in-aws#readme",
+  "dependencies": {
+    "serverless": "^1.44.1"
+  }
+}
