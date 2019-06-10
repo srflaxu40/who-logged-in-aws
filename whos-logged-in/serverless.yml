@@ -24,8 +24,8 @@ provider:
   runtime: python3.7
 
 # you can overwrite defaults here
-#  stage: dev
-#  region: us-east-1
+  stage: dev
+  region: us-east-2
 
 # you can add statements to the Lambda function's IAM Role here
 #  iamRoleStatements:
@@ -57,8 +57,8 @@ provider:
 #    - exclude-me-dir/**
 
 functions:
-  hello:
-    handler: handler.hello
+  whos-logged-in:
+    handler: handler.whos_logged_in
 
 #    The following are a few example events you can configure
 #    NOTE: Please make sure to change your handler code to work with those events
@@ -95,12 +95,12 @@ functions:
 #      variable2: value2
 
 # you can add CloudFormation resource templates here
-#resources:
-#  Resources:
-#    NewResource:
-#      Type: AWS::S3::Bucket
-#      Properties:
-#        BucketName: my-new-bucket
+resources:
+  Resources:
+    NewResource:
+      Type: AWS::S3::Bucket
+      Properties:
+        BucketName: whos-logged-in
 #  Outputs:
 #     NewOutput:
 #       Description: "Description for the output"

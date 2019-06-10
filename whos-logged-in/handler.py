@@ -1,7 +1,7 @@
 import json
 
 
-def hello(event, context):
+def whos_logged_in(event, context):
     body = {
         "message": "Go Serverless v1.0! Your function executed successfully!",
         "input": event
@@ -11,6 +11,8 @@ def hello(event, context):
         "statusCode": 200,
         "body": json.dumps(body)
     }
+
+    print("test")
 
     return response
 
