@@ -5,7 +5,9 @@
   * We use Grafana tables to view who has logged into AWS across various accounts.
 
 * Example:
-`aws cloudtrail lookup-events --lookup-attributes AttributeKey=EventName,AttributeValue=ConsoleLogin`
+```
+aws cloudtrail lookup-events --lookup-attributes AttributeKey=EventName,AttributeValue=ConsoleLogin
+```
 
 ## Setup
 `npm install -g serverless`

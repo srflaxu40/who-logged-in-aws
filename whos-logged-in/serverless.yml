@@ -22,26 +22,22 @@ service: whos-logged-in # NOTE: update this with your service name
 provider:
   name: aws
   runtime: python3.7
+  
+  #role: role-deploy
 
 # you can overwrite defaults here
   stage: dev
   region: us-east-2
 
 # you can add statements to the Lambda function's IAM Role here
-#  iamRoleStatements:
-#    - Effect: "Allow"
-#      Action:
-#        - "s3:ListBucket"
-#      Resource: { "Fn::Join" : ["", ["arn:aws:s3:::", { "Ref" : "ServerlessDeploymentBucket" } ] ]  }
-#    - Effect: "Allow"
-#      Action:
-#        - "s3:PutObject"
-#      Resource:
-#        Fn::Join:
-#          - ""
-#          - - "arn:aws:s3:::"
-#            - "Ref" : "ServerlessDeploymentBucket"
-#            - "/*"
+  iamRoleStatements:
+    - Effect: "Allow"
+      Action:
+        - "cloudtrail:LookupEvents"
+        - "cloudtrail:DescribeTrails"
+        - "events:*"
+      Resource:
+        - "*"
 
 # you can define service wide environment variables here
 #  environment:

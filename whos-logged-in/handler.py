@@ -1,26 +1,35 @@
-import json
+import json, boto3, datetime
 
 
 def whos_logged_in(event, context):
-    body = {
-        "message": "Go Serverless v1.0! Your function executed successfully!",
-        "input": event
-    }
 
-    response = {
-        "statusCode": 200,
-        "body": json.dumps(body)
-    }
+    client = boto3.client('cloudtrail')
+    cloudwatch_events = boto3.client('events')
 
-    print("test")
+    response = client.lookup_events(
+        LookupAttributes=[
+            {
+                'AttributeKey': 'EventName',
+                'AttributeValue': 'ConsoleLogin'
+            },
+        ],
+        StartTime=datetime.datetime.utcnow() - datetime.timedelta(minutes=105),
+        EndTime=datetime.datetime.utcnow(),
+        MaxResults=100
+    )
+
+    for entry in response['Events']:
+        entry['EventTime'] = entry['EventTime'].strftime("%Y-%m-%d %H:%M:%S")
+        cwResponse = cloudwatch_events.put_events(
+            Entries=[
+                {
+                    'Time': datetime.datetime.utcnow(),
+                    'Source': 'ConsoleLogin',
+                    'DetailType': 'ConsoleLogin',
+                    'Detail': "{\"username\":" + "\"" + entry['Username'] + "\"}"
+                },
+            ]
+        )
 
     return response
 
-    # Use this code if you don't use the http event with the LAMBDA-PROXY
-    # integration
-    """
-    return {
-        "message": "Go Serverless v1.0! Your function executed successfully!",
-        "event": event
-    }
-    """
